@@ -1,0 +1,42 @@
+<project name="dcParseArgs" default="build" basedir=".">
+  <description>
+      Builds dcParseArgs
+  </description>
+
+  <property name="src" location="src" />
+  <property name="build" location="build" />
+  <property name="jars" location="jars" />
+  <property name="dist" location="dist" />
+  <property name="config" location="config" />
+
+  <target name="clean">
+      <delete dir="${build}"/>
+      <delete dir="${dist}"/>
+  </target>
+
+  <target name="init" depends="clean">
+    <tstamp/>
+    <mkdir dir="${build}" />
+    <mkdir dir="${dist}" />
+  </target>
+
+  <target name="compile">
+      <javac srcdir="${src}" destdir="${build}">
+      </javac>
+  </target>
+
+ <target name="build" depends="init, compile">
+ </target>
+
+ <target name="build_no_init" depends="compile">
+ </target>
+
+ <target name="createJar" depends="build">
+     <jar destfile="${dist}/dcParseArgs.jar">
+         <fileset dir="${build}" />
+         <fileset dir="." includes="*.txt" />
+
+     </jar>
+ </target>
+
+</project>
